@@ -14,6 +14,18 @@ if [ ! -z "$USER" ] && [ ! -z "$PASS" ]; then
 	sed -i "/rpc-password/c\    \"rpc-password\": \"$PASS\"," /config/settings.json
 fi
 
+if [ ! -z "$TRANSMISSION_PEER_PORT"]; then
+	sed -i '/peer-port/c\	"peer-port": "$TRANSMISSION_PEER_PORT",' /config/settings.json
+fi
+
+if [ ! -z "$TRANSMISSION_PEER_LIMIT_GLOBAL"]; then
+	sed -i '/peer-limit-global/c\	"peer-limit-global": "$TRANSMISSION_PEER_LIMIT_GLOBAL",' /config/settings.json
+fi
+
+if [ ! -z "$TRANSMISSION_PEER_LIMIT_PER_TORRENT"]; then
+	set -i '/peer-limit-per-torrent/c\	"peer-limit-per-torrent": "$TRANSMISSION_PEER_LIMIT_PER_TORRENT",' /config/settings.json
+fi
+
 # permissions
 chown abc:abc \
 	/config/settings.json \
